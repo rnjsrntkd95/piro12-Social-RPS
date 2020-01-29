@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from RPS.models import Choice, Result
+
+admin.site.register(Result)
+admin.site.register(Choice)
+
