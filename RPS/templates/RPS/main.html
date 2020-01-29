@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="margin:10% auto ; text-align: center">
+        <h2 style="color:white; margin:0px 0px 50px 0px;">전 세계 피로그래머와 가위바위보를 즐겨보세요!</h2>
+        <div>
+            {% if user.is_authenticated %}
+                <a href="{% url "RPS:offline_log" %}" class="btn btn-outline-info" role="button" aria-pressed="true"
+                   style="font-size: 20px; padding: 15px 60px;">게임시작</a>
+            {% else %}
+                <a href="{% url "social_login" %}" class="btn btn-outline-info" role="button" aria-pressed="true"
+                   style="font-size: 20px; padding: 15px 60px;">게임시작</a>
+            {% endif %}
+        </div>
+        <div style="margin: 10px;">
+            <a href="{% url "RPS:offline_log" %}" class="btn btn-outline-info" role="button" aria-pressed="true"
+               style="font-size: 20px; padding: 15px 60px;">컴퓨터와 게임</a>
+        </div>
+    </div>
+{% endblock %}

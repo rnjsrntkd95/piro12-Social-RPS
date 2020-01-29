@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div style="margin:10vh 20vw 0 20vw; text-align: center; border:solid 5px white; color:white; font-size: 2.0em;">
+        <div style="margin-top:30px; padding:20px;">
+            Human: {{ game.human }}
+        </div>
+
+        <div style="padding:20px;">
+            Computer: {{ game.computer }}
+        </div>
+        <div style="margin-bottom:30px;padding:20px; font-size:3.0em; font-weight: bold">
+                {% if game.status == '승' %}
+                    승리는 기본이지ㅎ
+                    {% else %}
+                    어휴...
+                {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

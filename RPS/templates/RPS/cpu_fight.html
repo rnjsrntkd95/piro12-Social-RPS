@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="margin:5% 20% ; text-align: center; border:solid 5px white; color:white; font-size: 2.0em;">
+        <div style=" padding: 20px 0;">
+            공격자: Human
+        </div>
+        <div style="margin-bottom: 20px;">
+            <form action="" method="POST">
+                {% csrf_token %}
+                Attacker Choice:
+                <select name="human">
+                    {% for choice in rps %}
+                        <option value="{{ choice }}">{{ choice }}</option>
+                    {% endfor %}
+                </select>
+                <br/>
+                <br/>
+                <input type="submit" value="도전!!">
+            </form>
+        </div>
+    </div>
+{% endblock %}

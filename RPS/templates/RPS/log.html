@@ -1,0 +1,61 @@
+{#{% for i in result %}#}
+{#    <div>{{ i }}{{ i.created_at }}</div>#}
+{#{% endfor %}#}
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row"
+         style="justify-content:center;margin-top:30px; margin-right:0px;color:white; display:flex; font-size:1.5em; font-weight: bold">
+        <p>전적페이지</p>
+    </div>
+    {% for game in result %}
+
+        <div class="row" style="justify-content:center; margin:10px 0; color:white; display:flex; font-size:1.3em;">
+            <div class="row d-flex justify-content-between" id="hello"
+                 style="padding:20px 0; align-items:center; width:60vw;">
+                <div style="padding-left: 30px;width:10vw;">{{ forloop.counter }}</div>
+                <div class="title" style="margin:0px 20px;width:10vw;">
+                    {{ game }}
+                </div>
+                <div>
+                    {% if game.atk_status %}
+                        {% if game.attacker_id == user.id %}
+                            결과: {{ game.atk_status }}
+                        {% elif game.defender_id == user.id %}
+                            {% if game.atk_status == '승' %}
+                                결과: 패
+                            {% elif game.atk_status == '패' %}
+                                결과: 승
+                            {% else %}
+                                결과: 무승부
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% if game.attacker_id == user.id %}
+                            진행중...
+                        {% elif game.defender_id == user.id %}
+                            <div class="info" style="margin:0px 0px; padding-left: 3.5vw;width:13vw;">
+                                <a href="{% url "RPS:defense" game.pk user.id %}">
+                                    <button type="button" class="btn btn-outline-light" style="font-size:1.2em;">
+                                        대응하기
+                                    </button>
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                <div class="info" style="margin:0px 0px;width:10vw;">
+                    <a href="{% url "RPS:detail_log" game.pk %}">
+                        <button type="button" class="btn btn-outline-light" style="font-size:1.2em;">게임정보</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    {% endfor %}
+
+{% endblock %}
