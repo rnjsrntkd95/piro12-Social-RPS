@@ -1,6 +1,8 @@
+import copy
 import random
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from RPS.games import game
@@ -8,7 +10,7 @@ from RPS.models import Result, Choice
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'RPS/home.html')
 
 
 def log(request, pk):
@@ -38,8 +40,8 @@ def attack(request, pk):
             'defender': defender,
             'choice': choice
         }
-
-        return render(request, 'RPS/attack.html', context)
+        print(defender)
+        return render(request, 'RPS/fight.html', context)
 
 
 def defense(request, log_pk, pk):
@@ -72,18 +74,20 @@ def defense(request, log_pk, pk):
 
 def offline_log(request):
     logs = []
-    game = {}
     with open('log.txt', 'r', encoding='utf-8') as file:
         for row in file.readlines():
-            set = row.split()
-            game['human'] = set[0]
-            game['computer'] = set[1]
-            game['status'] = set[2]
+            game = {}
+            human, computer, status = row.split()
+            print(human, computer, status)
+            game['human'] = human
+            game['computer'] = computer
+            game['status'] = status
             logs.append(game)
+            print(logs)
     context = {
         'logs': logs
     }
-    return render(request, 'RPS/offline_log.html', context)
+    return render(request, 'RPS/pc.html', context)
 
 
 def offline_play(request):
@@ -97,4 +101,4 @@ def offline_play(request):
 
             return redirect('RPS:offline_log')
     else:
-        return render(request, 'RPS/offline_play.html')
+        return render(request, 'RPS/cpu_fight.html')

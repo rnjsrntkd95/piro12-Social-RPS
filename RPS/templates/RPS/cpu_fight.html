@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="box" style="color: white;">
+        공격자: Human
+        <br/>
+        <br/>
+        <form action="" method="POST">
+            {% csrf_token %}
+            Attacker Choice:
+            <input type="text" name="human">
+            <br/>
+            Defender: ------
+            <input type="submit">도전!!</input>
+        </form>
+        <br/>
+    </div>
+{% endblock %}

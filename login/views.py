@@ -26,11 +26,11 @@ def sign_up(request):
         if request.POST["password1"] == request.POST["password2"]:
             user = User.objects.create_user(
                 username=request.POST['username'], password=request.POST['password1'])
-            auth.login(request, user)
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('login')  # change to main page
         return render(request, 'login/signup.html')  # is this right? check again
-
-    return render(request, 'login/signup.html')
+    else:
+        return render(request, 'login/signup.html')
 
 
 def logout(request):
