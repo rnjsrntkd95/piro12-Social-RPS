@@ -14,7 +14,7 @@ def general_login(request):
         user = auth.authenticate(request, username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('login')  # change to main page
+            return redirect('RPS:offline_log')  # change to main page
         else:
             return render(request, 'login/social_login.html', {'error': 'username or password is incorrect'})
     else:
@@ -27,12 +27,13 @@ def sign_up(request):
             user = User.objects.create_user(
                 username=request.POST['username'], password=request.POST['password1'])
             auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('login')  # change to main page
+            return redirect('social_login')  # change to main page
         return render(request, 'login/signup.html')  # is this right? check again
+
     else:
         return render(request, 'login/signup.html')
 
 
 def logout(request):
     auth.logout(request)
-    return redirect('login')  # change to main page
+    return redirect('RPS:main')  # change to main page

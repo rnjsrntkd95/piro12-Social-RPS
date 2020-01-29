@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div style="margin:5% 20% ; text-align: center; border:solid 5px white; color:white;">
-        <br/>
-        <br/>
+    <div style="margin:5% 20% ; text-align: center; border:solid 5px white; color:white; font-size: 2.0em;">
         <form method="POST">
-        {% csrf_token %}
-            공격자: {{ 유저이름 }}
-            {{ attacker.username }}
-            <input name="attacker" type="hidden" value="{{ attacker.username }}">
+            {% csrf_token %}
+            <div style="margin-top:30px; font-weight: bold;">
+                공격자: {{ 유저이름 }}
+                {{ attacker.username }}
+                <input name="attacker" type="hidden" value="{{ attacker.username }}">
 
+            </div>
             <br/>
             Defender:
             <select name="defender">
@@ -18,7 +18,7 @@
                     <option value="{{ player.username }}">{{ player.username }}</option>
                 {% endfor %}
             </select>
-
+            &nbsp;&nbsp;&nbsp;&nbsp;
             Attacker Choice:
 
             <select name="atk_choice">
@@ -27,9 +27,10 @@
                 {% endfor %}
             </select>
 
-            <br/>
-
-            <input type="submit" value="도전!!"></input>
+            <br/><br/>
+            <div style="margin-bottom:30px;">
+                <input type="submit" value="도전!!"></input>
+            </div>
         </form>
     </div>
 {% endblock %}

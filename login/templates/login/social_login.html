@@ -3,7 +3,8 @@
 {% providers_media_js %}
 {% block content %}
 
-    <div class="container" style=" background-color: white;">
+    <div class="container" style="color: white; display:flex; justify-content: center">
+        <div style="width:30vw; margin-top:20vh;">
             <h1>소셜 로그인을 해봐요!</h1>
 
             {% if user.is_authenticated %}
@@ -11,11 +12,17 @@
                 {{ user.username }} 님이 로그인 중
 
             {% else %}
-                {% include 'login/general_login.html' %}
+                <div style="margin-bottom: 20px;">
+                    {% include 'login/general_login.html' %}
+                </div>
+                <div>
                     <a href="{% provider_login_url 'google' %}">구글 로그인</a><br>
-                로그인 하셔야 합니다. <br>
-                <a href="{% url 'sign_up' %}">회원가입</a><br>
+                </div>
+                <div>
+                    <a href="{% url 'sign_up' %}">회원가입</a>
+                </div>
 
             {% endif %}
-\    </div>
+        </div>
+    </div>
 {% endblock %}

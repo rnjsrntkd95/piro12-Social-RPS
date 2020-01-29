@@ -18,4 +18,4 @@ class Result(models.Model):
     atk_status = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
-        return f'{self.attacker}vs{self.defender}'
+        return f'{self.attacker} vs {self.defender}'

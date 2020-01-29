@@ -9,8 +9,8 @@ from RPS.games import game
 from RPS.models import Result, Choice
 
 
-def home(request):
-    return render(request, 'RPS/home.html')
+def main(request):
+    return render(request, 'RPS/main.html')
 
 
 def log(request, pk):
@@ -40,7 +40,6 @@ def attack(request, pk):
             'defender': defender,
             'choice': choice
         }
-        print(defender)
         return render(request, 'RPS/fight.html', context)
 
 
@@ -51,10 +50,8 @@ def defense(request, log_pk, pk):
         atk_choice = result.atk_choice
         def_choice = Choice.objects.get(rps=request.POST['def_choice'])
         result.atk_status = game(atk_choice.rps, def_choice.rps)
+        result.def_choice = def_choice
         result.save()
-        a = Result.objects.get(pk=log_pk)
-        print(a.atk_status)
-
         return redirect(reverse('RPS:log', kwargs={'pk': pk}))
     else:
         result = Result.objects.get(pk=log_pk)
@@ -69,7 +66,7 @@ def defense(request, log_pk, pk):
             'choice': choice
         }
 
-        return render(request, 'RPS/defense.html', context)
+        return render(request, 'RPS/react.html', context)
 
 
 def offline_log(request):
@@ -78,21 +75,19 @@ def offline_log(request):
         for row in file.readlines():
             game = {}
             human, computer, status = row.split()
-            print(human, computer, status)
             game['human'] = human
             game['computer'] = computer
             game['status'] = status
             logs.append(game)
-            print(logs)
     context = {
         'logs': logs
     }
-    return render(request, 'RPS/pc.html', context)
+    return render(request, 'RPS/human.html', context)
 
 
 def offline_play(request):
+    rps = ['가위', '보', '바위']
     if request.method == 'POST':
-        rps = ['가위', '보', '바위']
         req = request.POST
         computer = random.choice(rps)
         status = game(req['human'], computer)
@@ -101,4 +96,37 @@ def offline_play(request):
 
             return redirect('RPS:offline_log')
     else:
-        return render(request, 'RPS/cpu_fight.html')
+        context = {
+            'rps': rps
+        }
+        return render(request, 'RPS/cpu_fight.html', context)
+
+
+def cpu_status(request, pk):
+    count = 0
+    game = {}
+    with open('log.txt', 'r', encoding='utf-8') as file:
+        for row in file.readlines():
+
+            count += 1
+            if count != pk:
+                continue
+            human, computer, status = row.split()
+            game['human'] = human
+            game['computer'] = computer
+            game['status'] = status
+            break
+    print(game)
+    context = {
+        'game': game
+    }
+    return render(request, 'RPS/cpu_status.html', context)
+
+
+def detail_log(request, pk):
+    result = Result.objects.get(pk=pk)
+    context= {
+        'result': result
+    }
+    return render(request, 'RPS/detail_log.html', context)
+
