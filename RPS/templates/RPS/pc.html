@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row" style="justify-content:space-between; margin:3% auto;">
+        <div>
+           <a href="#" class="btn btn-outline-light" role="button" aria-pressed="true" style="font-size: 15px; font-weight:bold; border-width:3px; padding: 15px 30px; margin:0px 35px;">대결하기</a>
+        </div>
+        <div>
+            <a href="#" class="btn btn-outline-light" role="button" aria-pressed="true" style="font-size: 15px; font-weight:bold; border-width:3px; padding: 15px 30px; margin:0px 35px;">게임모드 변경</a>
+        </div>
+    </div>
+    <div style="margin:0px auto; text-align: center; color:white; font-weight: bold;">
+        <h1>PC와의 전적</h1>
+    </div>
+
+
+    {% for player in player_list %}
+    <div class="row" style="justify-content:center; margin:60px 0; color:white">
+        <div class="row" id="hello" style="padding:10px 0;">
+            <div class="title" style="margin:0px 40px;">
+                Human vs Computer
+            </div>
+
+            <div class="result" style="margin:0px 40px;">
+            결과: {{log.status}}
+            </div>
+
+            <div class="info" style="margin:0px 40px;">
+                <a href=""><button type="button" class="btn btn-outline-light">게임 정보</button></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
