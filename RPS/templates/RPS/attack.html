@@ -1,0 +1,18 @@
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ attacker.username }}
+    <input name="attacker" type="hidden" value="{{ attacker.username }}">
+    <select name="defender">
+        {% for player in defender %}
+            <option value="{{ player.username }}">{{ player.username }}</option>
+        {% endfor %}
+    </select>
+    <select name="atk_choice">
+        {% for i in choice %}
+            <option value="{{ i.rps }}">{{ i.rps }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" value="공격">
+</form>
