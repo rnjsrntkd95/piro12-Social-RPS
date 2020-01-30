@@ -16,13 +16,21 @@
                     {% include 'login/general_login.html' %}
                 </div>
                 <div>
-                    <a href="{% provider_login_url 'google' %}">구글 로그인</a><br>
-                </div>
-                <div>
-                    <a href="{% url 'sign_up' %}">회원가입</a>
+                <div style="display:flex; flex-direction: row">
+                    <div>
+                        <a href="{% provider_login_url 'google' %}" class="btn btn-outline-light" role="button"
+                           aria-pressed="true"
+                           style="width:200px;font-size: 1.5em; font-weight:bold; border-width:3px; padding: 15px 30px; margin-right:20px;">GOOGLE</a>
+                    </div>
+
+                    <div>
+                        <a href="{% url 'sign_up' %}" class="btn btn-outline-light" role="button"
+                           aria-pressed="true"
+                           style=" width:200px;font-size: 1.5em; font-weight:bold; border-width:3px; padding: 15px 30px;">회원가입</a>
+                    </div>
                 </div>
 
             {% endif %}
+            </div>
         </div>
-    </div>
 {% endblock %}
