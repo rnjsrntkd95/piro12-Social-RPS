@@ -142,4 +142,4 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 
 # LOGIN_URL = reverse_lazy('login:social_login')
-LOGIN_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = '/'

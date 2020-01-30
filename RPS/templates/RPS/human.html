@@ -1,49 +1,69 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row" style="justify-content:space-between; margin:3% auto;">
-        <div>
-           <a href="#" class="btn btn-outline-light" role="button" aria-pressed="true" style="font-size: 15px; font-weight:bold; border-width:3px; padding: 15px 30px; margin:0px 35px;">대결하기</a>
-        </div>
-        <div>
-            <a href="#" class="btn btn-outline-light" role="button" aria-pressed="true" style="font-size: 15px; font-weight:bold; border-width:3px; padding: 15px 30px; margin:0px 35px;">게임모드 변경</a>
-        </div>
-    </div>
-    <div style="margin:0px auto; text-align: center; color:white; font-weight: bold;">
-        <h1>다른 유저와의 전적</h1>
-    </div>
-
-
-    {% for player in player_list %}
-    <div class="row" style="justify-content:center; margin:60px 0; color:white">
-        <div class="row" id="hello" style="padding:10px 0;">
-            <div class="title" style="margin:0px 40px;">
-                {{ player.attacker }} vs {{ player.defender }}
+    {% if user.is_authenticated %}
+        <div style="display:flex; flex-direction: row; justify-content: center; margin-top:30px;">
+            <div>
+                <a href="{% url 'RPS:attack' user.pk %}" class="btn btn-outline-light" role="button" aria-pressed="true"
+                   style="font-size: 1.5em; font-weight:bold; border-width:3px; padding: 15px 30px; margin-right:10vw;">사람과
+                    플레이하기</a>
             </div>
-
-            <div class="result" style="margin:0px 40px;">
-                {% if player.attacker == user.get_username and Result.atk_status == "" %}
-                    진행중...
-                {% elif player.defender == user.get_username and Result.atk_status == None %}
-                    <a href="react.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">대응하기</a>
-                {% elif Result.atk_status == 'draw' %}
-                    결과: 무
+            <div>
+                <a href="{% url "RPS:offline_play" %}" class="btn btn-outline-light" role="button" aria-pressed="true"
+                   style="font-size: 1.5em; font-weight:bold; border-width:3px; padding: 15px 30px; margin-left: 10vw;">컴퓨터와
+                    플레이하기</a>
+            </div>
+        </div>
+    {% else %}
+        <div style="display:flex; flex-direction: row; justify-content: center; margin-top:30px;">
+            <div>
+                <a href="{% url 'RPS:offline_play' %}" class="btn btn-outline-light" role="button"
+                   aria-pressed="true"
+                   style="font-size: 1.5em; font-weight:bold; border-width:3px; padding: 15px 30px; margin-right:10vw;">대결하기
+                    </a>
+            </div>
+            <div>
+                {% if user.is_authenticated %}
+                    <a href="{% url "RPS:offline_log" %}" class="btn btn-outline-light" role="button" aria-pressed="true"
+                       style="font-size: 1.5em; font-weight:bold; border-width:3px; padding: 15px 30px; margin-left: 10vw;">게임모드
+                        변경
+                    </a>
                 {% else %}
-                    {% if player.attacker == user.get_username %}
-                        결과: {{Result.atk_status}}
-                    {% elif player.defender == user.get_username and Result.atk_status == 'win' %}
-                        결과: 패
-                    {% elif player.defender == user.get_username and Result.atk_status == 'lose' %}
-                        결과: 승
-                    {% endif %}
+                    <a href="{% url "social_login" %}" class="btn btn-outline-light" role="button" aria-pressed="true"
+                       style="font-size: 1.5em; font-weight:bold; border-width:3px; padding: 15px 30px; margin-left: 10vw;">게임모드
+                        변경
+                    </a>
+
                 {% endif %}
             </div>
+        </div>
+    {% endif %}
 
-            <div class="info" style="margin:0px 40px;">
-                <a href=""><button type="button" class="btn btn-outline-light">게임 정보</button></a>
+    <div style="margin:40px auto; text-align: center; color:white; font-weight: bold;">
+        <h1>PC와의 전적</h1>
+    </div>
+    {% for log in logs %}
+
+        <div class="row" style="justify-content:center; margin:10px 0; color:white; display:flex; font-size:1.3em;">
+            <div class="row d-flex justify-content-between" id="hello"
+                 style="padding:20px 0; align-items:center; width:60vw;">
+                <div style="padding-left: 30px;width:10vw;">{{ forloop.counter }}</div>
+                <div class="title" style="margin:0px 20px;width:10vw;">
+                    Human vs Computer
+                </div>
+                <div>
+                    결과: {{ log.status }}
+                </div>
+
+                <div class="info" style="margin:0px 0px;width:10vw;">
+                    <a href="{% url "RPS:cpu_status" forloop.counter %}">
+                        <button type="button" class="btn btn-outline-light" style="font-size:1.2em;">게임정보</button>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+
+
     {% endfor %}
 
 {% endblock %}

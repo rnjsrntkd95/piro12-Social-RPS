@@ -3,8 +3,8 @@
 
     <form action="{% url 'general_login' %}" method="POST">
         {% csrf_token %}
-        Username: <input type="text" name="username"> <br>
-        Password: <input type="password" name="password"> <br>
-        <input type="submit" class="btn-btn-primary" value="로그인">
+        Username: <input type="text" name="username"> <br/><br/>
+        Password: &nbsp;<input type="password" name="password"> <br/><br/>
+        <input type="submit" class=" btn btn-outline-light" value="LOGIN" style="width:380px; color:white; background-color: black;font-size: 1.5em; font-weight:bold; border-width:3px; padding: 0 30px;;">
     </form>
 </div>

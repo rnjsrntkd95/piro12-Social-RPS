@@ -3,7 +3,8 @@
 {% providers_media_js %}
 {% block content %}
 
-    <div class="container" style=" background-color: white;">
+    <div class="container" style="color: white; display:flex; justify-content: center">
+        <div style="width:30vw; margin-top:20vh;">
             <h1>소셜 로그인을 해봐요!</h1>
 
             {% if user.is_authenticated %}
@@ -11,11 +12,25 @@
                 {{ user.username }} 님이 로그인 중
 
             {% else %}
-                {% include 'login/general_login.html' %}
-                    <a href="{% provider_login_url 'google' %}">구글 로그인</a><br>
-                로그인 하셔야 합니다. <br>
-                <a href="{% url 'sign_up' %}">회원가입</a><br>
+                <div style="margin-bottom: 20px;">
+                    {% include 'login/general_login.html' %}
+                </div>
+                <div>
+                <div style="display:flex; flex-direction: row">
+                    <div>
+                        <a href="{% provider_login_url 'google' %}" class="btn btn-outline-light" role="button"
+                           aria-pressed="true"
+                           style="width:200px;font-size: 1.5em; font-weight:bold; border-width:3px; padding: 15px 30px; margin-right:20px;">GOOGLE</a>
+                    </div>
+
+                    <div>
+                        <a href="{% url 'sign_up' %}" class="btn btn-outline-light" role="button"
+                           aria-pressed="true"
+                           style=" width:200px;font-size: 1.5em; font-weight:bold; border-width:3px; padding: 15px 30px;">회원가입</a>
+                    </div>
+                </div>
 
             {% endif %}
-\    </div>
+            </div>
+        </div>
 {% endblock %}
