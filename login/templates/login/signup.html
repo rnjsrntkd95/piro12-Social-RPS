@@ -1,18 +1,22 @@
 {% extends 'base.html' %}
 {% load socialaccount %}
 {% providers_media_js %}
+
+
 {% block content %}
 
+
     <div class="container" style="color: white; display:flex; justify-content: center">
-        <div style="width:30vw; margin-top:20vh;">
+        <div style="width:30vw; margin-top:15vh;">
             <h1>회원가입</h1>
             <div class="container">
                 <form action="{% url 'sign_up' %}" method="POST">
                     {% csrf_token %}
-                    Username: <input type="text" name="username"> <br>
-                    Password: <input type="password" name="password1"> <br>
-                    Confirm Password: <input type="password" name="password2"> <br>
-                    <input type="submit" class="btn-btn-primary" value="sign_up">
+                    <br/>
+                    Username: <input type="text" name="username"><br/><br/>
+                    Password: &nbsp;<input type="password" name="password1"> <br><br/>
+                    Confirm <br/>Password: &nbsp;<input type="password" name="password2"> <br><br/>
+                    <input type="submit" class="btn btn-outline-dark" value="제출" style="width:260px; font-size: 1.3em;color:white;padding: 10px 30px; border-width: 5px; border-color: white; font-weight: bold">
                 </form>
             </div>
         </div>

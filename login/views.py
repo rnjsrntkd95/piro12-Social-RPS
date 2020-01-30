@@ -27,9 +27,8 @@ def sign_up(request):
             user = User.objects.create_user(
                 username=request.POST['username'], password=request.POST['password1'])
             auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('social_login')  # change to main page
+            return redirect('RPS:offline_log')  # change to main page
         return render(request, 'login/signup.html')  # is this right? check again
-
     else:
         return render(request, 'login/signup.html')
 

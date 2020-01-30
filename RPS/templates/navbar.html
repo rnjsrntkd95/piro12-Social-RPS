@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse">
         <div class="navbar-nav">
             {% if user.is_authenticated %}
-                <div class="nav-item nav-link">안녕하세요. {{ user.username }}님</div>
+                <div class="" style="display:flex;align-items: center; color: #5897fb; font-weight: bold">안녕하세요. {{ user.username }}님</div>
                 <a class="nav-item nav-link" href="{% url "logout" %}" onclick="return confirm('확실합니까?');"/>로그아웃</a>
                 <a class="nav-item nav-link" href="{% url "RPS:log" user.pk %}">전적보기</a>
             {% else %}

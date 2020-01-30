@@ -1,10 +1,9 @@
 <div class="container">
-    <h3>login</h3>
-
+<br/><br/>
     <form action="{% url 'general_login' %}" method="POST">
         {% csrf_token %}
         Username: <input type="text" name="username"> <br/><br/>
         Password: &nbsp;<input type="password" name="password"> <br/><br/>
-        <input type="submit" class=" btn btn-outline-light" value="LOGIN" style="width:380px; color:white; background-color: black;font-size: 1.5em; font-weight:bold; border-width:3px; padding: 0 30px;;">
+        <input type="submit" class=" btn btn-outline-dark" value="LOGIN" style="width:380px; font-size: 1.3em;color:white;padding: 0 30px; border-width: 5px; border-color: white; font-weight: bold">
     </form>
 </div>
