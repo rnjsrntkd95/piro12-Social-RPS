@@ -1,24 +1,53 @@
 {% extends 'base.html' %}
 {% load socialaccount %}
 {% providers_media_js %}
-
-
 {% block content %}
 
-
-    <div class="container" style="color: white; display:flex; justify-content: center">
-        <div style="width:30vw; margin-top:15vh;">
-            <h1>회원가입</h1>
+    <div class="container" style="color: white; display:flex; justify-content: center; margin-left:16vw;">
+        <div style="width:30vw; margin-top:20vh;">
+            <h1 style="font-weight:bold;">회원가입</h1><br>
             <div class="container">
                 <form action="{% url 'sign_up' %}" method="POST">
                     {% csrf_token %}
-                    <br/>
-                    Username: <input type="text" name="username"><br/><br/>
-                    Password: &nbsp;<input type="password" name="password1"> <br><br/>
-                    Confirm <br/>Password: &nbsp;<input type="password" name="password2"> <br><br/>
-                    <input type="submit" class="btn btn-outline-dark" value="제출" style="width:260px; font-size: 1.3em;color:white;padding: 10px 30px; border-width: 5px; border-color: white; font-weight: bold">
+                    <div style="font-weight:bold;">Username: <input type="text" name="username"></div>
+                    <br>
+                    <div style="font-weight:bold;">Password: <input type="password" name="password1"></div>
+                    <br>
+                    <div style="font-weight:bold;">Confirm Password: <input type="password" name="password2"></div>
+                    <br>
+                    {#                    <input type="submit" class="btn-btn-primary" value="sign_up">#}
+                    <input type="submit" class="btn btn-outline-dark" value="제출"
+                           style="width:300px; font-size: 1.3em;color:white;padding: 0px 30px; border-width: 5px; border-color: white; font-weight: bold">
+
                 </form>
             </div>
         </div>
     </div>
 {% endblock %}
+
+
+{#{% extends 'base.html' %}#}
+{#{% load socialaccount %}#}
+{#{% providers_media_js %}#}
+{##}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <div class="container" style="color: white; display:flex; justify-content: center">#}
+{#        <div style="width:30vw; margin-top:15vh;">#}
+{#            <h1>회원가입</h1>#}
+{#            <div class="container">#}
+{#                <form action="{% url 'sign_up' %}" method="POST">#}
+{#                    {% csrf_token %}#}
+{#                    <br/>#}
+{#                    Username: <input type="text" name="username"><br/><br/>#}
+{#                    Password: &nbsp;<input type="password" name="password1"> <br><br/>#}
+{#                    Confirm <br/>Password: &nbsp;<input type="password" name="password2"> <br><br/>#}
+<input type="submit" class="btn btn-outline-dark" value="제출"
+       style="width:260px; font-size: 1.3em;color:white;padding: 10px 30px; border-width: 5px; border-color: white; font-weight: bold">
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
